@@ -1,5 +1,4 @@
 "use client"
-import { subscribe } from "diagnostics_channel"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
@@ -11,7 +10,7 @@ export default function SubscribeBtnBox({
 }: SubscribeBtnProps) {
   const router = useRouter()
   function handleSubscribe() {
-    router.push("https://t.me/+_xgdnOTBCiBhNjBh")
+    router.push("https://t.me/tqdtc")
   }
   const w = width ? width : ""
   const p = padding ? padding : "px-4 py-1"
@@ -41,7 +40,7 @@ export function SubscribeBtnRound({
 }: SubscribeBtnProps) {
   const router = useRouter()
   function handleSubscribe() {
-    router.push("https://t.me/+_xgdnOTBCiBhNjBh")
+    router.push("https://t.me/tqdtc")
   }
   const w = width ? width : "w-15"
   const p = padding ? padding : "px-1 py-1"

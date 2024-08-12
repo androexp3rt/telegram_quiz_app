@@ -6,6 +6,7 @@ import HomePageInputs from "./components/homePageInputs/homePageInputs"
 import StartQuizContainer from "./components/startQuizContainer"
 import ErrorBoundary from "./components/ErrorBoundary"
 import Navbar from "./components/Navbar"
+import checkSubs from "../../lib/checkSubs"
 
 
 // Create a global interface
@@ -17,6 +18,7 @@ declare global {
           user: {
             first_name: string;
             last_name: string;
+            id:number;
             // Add other properties as needed
           };
         };
@@ -49,7 +51,10 @@ export default function Home() {
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
       const { initDataUnsafe } = window.Telegram.WebApp;
       const { user } = initDataUnsafe;
-      setUser(user as TelegramUser);
+      checkSubs({userId:user.id}).then(sub => {
+        setIsSubscriber(sub);
+        setUser(user as TelegramUser);
+      });
     }
   }, []);
   return (
