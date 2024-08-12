@@ -13,6 +13,7 @@ export default async function checkSubs({ userId }: Params) {
       baseURL: BASE_URL,
       params,
     })
+    console.log(result)
     return result.data.ok
   } catch (e) {
     return false
