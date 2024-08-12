@@ -3,7 +3,6 @@ type Params = {
   userId: number
 }
 export default async function checkSubs({ userId }: Params) {
-  console.log(`MY BOT TOKEN IS : ${process.env.NEXT_PUBLIC_TOKEN}`)
   const BASE_URL = `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TOKEN}`
   const params = {
     chat_id: -1002199305321, //test dev channel
@@ -14,9 +13,11 @@ export default async function checkSubs({ userId }: Params) {
       baseURL: BASE_URL,
       params,
     })
-    console.log(result)
-    console.log(`MY BOT TOKEN IS : ${process.env.NEXT_PUBLIC_TOKEN}`)
-    return result.data.ok
+    if ( result.data.result.status === "member" )  {
+      return true
+    } else {
+      return false
+    }
   } catch (e) {
     return false
   }
