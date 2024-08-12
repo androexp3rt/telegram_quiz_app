@@ -16,16 +16,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://telegram.org/js/telegram-web-app.js';
-    script.async = true;   
-    // Set script to load asynchronously
-    document.head.appendChild(script);
-  }, []);
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script src="https://telegram.org/js/telegram-web-app.js" defer />
       </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
