@@ -1,0 +1,78 @@
+"use client"
+import { useRouter } from "next/navigation"
+import React, { useEffect, useState } from "react"
+import Heading from "./components/heading"
+import HomePageInputs from "./components/homePageInputs/homePageInputs"
+import StartQuizContainer from "./components/startQuizContainer"
+import ErrorBoundary from "./components/ErrorBoundary"
+import Navbar from "./components/Navbar"
+
+
+// Create a global interface
+declare global {
+  interface Window {
+    Telegram: {
+      WebApp: {
+        initDataUnsafe: {
+          user: {
+            first_name: string;
+            last_name: string;
+            // Add other properties as needed
+          };
+        };
+      };
+    };
+  }
+}
+
+export default function Home() {
+  const router = useRouter()
+  const [mode, setMode] = useState<string>("light")
+  const [quizId, setQuizId] = useState<number>(0)
+  const [quizIdMin, setQuizIdMin] = useState<number>(11407)
+  const [quizIdMax, setQuizIdMax] = useState<number>(12598)
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [user, setUser] = useState<TelegramUser | null>(null)
+  const [isSubscriber, setIsSubscriber] = useState<boolean>(false)
+
+  // useEffect(() => {
+  //   if (sessionStorage.getItem("user")) {
+  //     const ud: TelegramUser = JSON.parse(sessionStorage.getItem("user")!)
+  //     setUser(ud)
+  //     setIsSubscriber(ud.isSubscriber)
+  //     setIsLoggedIn(true)
+  //   } else {
+  //     router.push("/login")
+  //   }
+  // }, [router])
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
+      const { initDataUnsafe } = window.Telegram.WebApp;
+      const { user } = initDataUnsafe;
+      setUser(user as TelegramUser);
+    }
+  }, []);
+  return (
+    <ErrorBoundary>
+      <main className="min-h-screen">
+        {/* <Navbar back={false} logout={isLoggedIn} /> */}
+        <Navbar back={false} logout={false} />
+        <section className="p-5">
+          <Heading />
+          <p className="w-full flex justify-center font-bold text-lg">{`Welcome ${user?.username}!`}</p>
+          <HomePageInputs
+            handleQuizId={setQuizId}
+            quizIdMin={quizIdMin}
+            quizIdMax={quizIdMax}
+          />
+          <StartQuizContainer
+            quizId={quizId}
+            quizIdMin={quizIdMin}
+            quizIdMax={quizIdMax}
+            isSubscriber={isSubscriber}
+          />
+        </section>
+      </main>
+    </ErrorBoundary>
+  )
+}
