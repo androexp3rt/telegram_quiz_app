@@ -7,6 +7,7 @@ import StartQuizContainer from "./components/startQuizContainer"
 import ErrorBoundary from "./components/ErrorBoundary"
 import Navbar from "./components/Navbar"
 import checkSubs from "../../lib/checkSubs"
+import Script from 'next/script'
 
 
 // Create a global interface
@@ -59,6 +60,7 @@ export default function Home() {
   }, []);
   return (
     <ErrorBoundary>
+      <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
       <main className="min-h-screen">
         {/* <Navbar back={false} logout={isLoggedIn} /> */}
         <Navbar back={false} logout={false} />
