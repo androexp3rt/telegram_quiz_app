@@ -1,18 +1,15 @@
 "use client"
-import Image from "next/image"
-import LogoutBtn from "./logoutBtn"
 import Link from "next/link"
 import ThemeSwitch from "./ThemeSwitch"
 
 type Params = {
   back: boolean
-  logout: boolean
 }
-export default function Navbar({ back, logout }: Params) {
+export default function Navbar({ back }: Params) {
   return (
     <nav
       className={`w-full bg-slate-300 dark:bg-gray-600 dark:text-white flex align-center justify-between px-2 ${
-        logout ? "py-2" : back ? "py-2" : "py-3"
+        back ? "py-2" : "py-3"
       }`}
     >
       <div className="w-1/2 lg:w-1/4">
@@ -31,7 +28,6 @@ export default function Navbar({ back, logout }: Params) {
       </h1>
       <div className="w-1/2 lg:w-1/4 flex justify-between lg:justify-end">
         <ThemeSwitch />
-        {logout ? <LogoutBtn /> : <></>}
       </div>
     </nav>
   )
