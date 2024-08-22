@@ -13,7 +13,7 @@ export default async function checkSubs({ userId }: Params) {
       baseURL: BASE_URL,
       params,
     })
-    if ( result.data.result.status === "member" )  {
+    if ( result.data.result.status === "member" || result.data.result.status === "administrator" )  {
       return true
     } else {
       return false
