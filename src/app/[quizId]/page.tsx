@@ -1,7 +1,6 @@
 import getQuizData from "../../../lib/getQuizData"
 import Link from "next/link"
 import Heading from "../components/heading"
-import LogoutBtn from "../components/logoutBtn"
 import { displayTime } from "../../../lib/calculateTime"
 import quizes from "../../../lib/allQuizes"
 import Navbar from "../components/Navbar"
@@ -18,7 +17,7 @@ export default async function QuizHome({ params: { quizId } }: Params) {
   const questions = quizData.questions
   return (
     <main className="w-full min-h-screen">
-      <Navbar back={true} logout={true} />
+      <Navbar back={true} />
       <section className="p-5">
         <Heading />
         <p className="w-full flex justify-center font-bold text-lg">{title}</p>
